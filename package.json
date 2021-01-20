@@ -1,0 +1,21 @@
+{
+	"name": "mendo-private-api",
+	"version": "0.0.1",
+	"description": "",
+	"main": "index.js",
+	"scripts": {},
+	"keywords": [
+		"private-api",
+		"api",
+		"competitive-programming",
+		"cli"
+	],
+	"author": "Vlatko Stojkoski",
+	"license": "MIT",
+	"dependencies": {
+		"axios": "^0.21.1",
+		"cheerio": "^1.0.0-rc.5",
+		"dotenv": "^8.2.0",
+		"querystring": "^0.2.0"
+	}
+}
