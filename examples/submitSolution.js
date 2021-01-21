@@ -9,9 +9,9 @@ require('dotenv').config({ path: '../.env' });
 			process.env.MENDO_PASSWORD
 		);
 
-		const solutions = await userClient.calcSolutions();
+		const taskSolution = await userClient.submitSolution('341', 'example.cpp');
 
-		console.log(solutions);
+		console.log(taskSolution);
 	} catch (error) {
 		console.error(error);
 		process.exit(1);
