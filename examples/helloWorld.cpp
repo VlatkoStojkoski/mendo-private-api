@@ -1,8 +1,9 @@
 #include <iostream>
 
+using namespace std;
+
 int main()
 {
-	std::cout << "zdravo";
-
+	cout << "zdravo";
 	return 0;
 }
