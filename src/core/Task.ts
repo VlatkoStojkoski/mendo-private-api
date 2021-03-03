@@ -1,15 +1,7 @@
 import axios from 'axios';
 import cheerio from 'cheerio';
 
-import {
-	TaskStatistics,
-	TaskInfo,
-	TaskContent,
-	TaskLimits,
-	ExampleCase,
-} from './types';
-
-import fs from 'fs';
+import { TaskStatistics, TaskInfo, TaskContent, TaskLimits } from '../types';
 
 class Task {
 	info: TaskInfo;

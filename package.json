@@ -1,17 +1,22 @@
 {
 	"name": "mendo-private-api",
+	"author": "Vlatko Stojkoski",
 	"version": "0.5.1",
-	"description": "",
-	"main": "index.js",
-	"scripts": {},
+	"description": "A private API wrapper for mendo.mk (system for competitions in informatics in Macedonia).",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
 	"keywords": [
 		"private-api",
 		"api",
 		"competitive-programming",
 		"cli"
 	],
-	"author": "Vlatko Stojkoski",
+	"repository": "https://github.com/VlatkoStojkoski/mendo-private-api",
+	"homepage": "https://github.com/VlatkoStojkoski/mendo-private-api",
 	"license": "MIT",
+	"files": [
+		"dist"
+	],
 	"dependencies": {
 		"axios": "^0.21.1",
 		"cheerio": "^1.0.0-rc.5",

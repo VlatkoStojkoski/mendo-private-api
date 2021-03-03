@@ -14,10 +14,9 @@ import {
 	SubmissionError,
 	SubmissionFeedback,
 	SubmissionOptions,
-	SubmissionOptionsWithPath,
 	TaskInfoBase,
 	CompetitionTaskInfo,
-} from './types';
+} from '../types';
 
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
@@ -27,11 +26,11 @@ class MendoClient {
 		if (cookie) axios.defaults.headers.Cookie = cookie;
 	}
 
-	getCookie() {
+	getCookie(): string {
 		return axios.defaults.headers.Cookie;
 	}
 
-	async login(credentials: LoginCredentials) {
+	async login(credentials: LoginCredentials): Promise<MendoClient> {
 		if (!isLoginCredentials(credentials)) throw Error('Undefined credentials');
 
 		await this.generateSession();
@@ -46,10 +45,9 @@ class MendoClient {
 		const $ = cheerio.load(res.data);
 		if ($('#username').length) throw Error('Invalid credentials: ' + req);
 
-		return res;
+		return this;
 	}
-
-	async register(credentials: RegisterCredentials) {
+	async register(credentials: RegisterCredentials): Promise<MendoClient> {
 		if (!isRegisterCredentials(credentials))
 			throw Error('Undefined credentials');
 
@@ -75,7 +73,7 @@ class MendoClient {
 					.trim()} (${req})`
 			);
 
-		return res;
+		return this;
 	}
 
 	async generateSession() {
