@@ -1,12 +1,14 @@
-const Client = require('../lib/MendoClient');
-const userClient = new Client();
+const { MendoClient } = require('../');
+require('dotenv').config({ path: '../.env' });
+
+const userClient = new MendoClient();
 
 (async () => {
 	try {
 		await userClient.register({
-			username: 'mendoPrivateAPIacc10',
+			username: 'mendoPrivateAPIacc21',
 			fullName: 'Mendo Private API',
-			email: 'test@mail10.com',
+			email: 'test@mail21.com',
 			password: 'password',
 			city: 'Скопје',
 			country: '102',
@@ -14,12 +16,15 @@ const userClient = new Client();
 			institution: 'Tests Inc.',
 		});
 
-		const taskSolution = await userClient.sendSubmission(
-			'341',
-			'helloWorld.cpp'
-		);
+		console.time('⏰');
 
+		const taskSolution = await userClient.sendSubmission({
+			taskId: '341',
+			submissionPath: 'helloWorld.cpp',
+		});
 		console.log(taskSolution);
+
+		console.timeEnd('⏰'); // Print the time taken to send submission
 	} catch (error) {
 		console.error(error);
 		process.exit(1);

@@ -1,14 +1,17 @@
-const MendoClient = require('../');
+const { MendoClient } = require('../');
+require('dotenv').config({ path: '../.env' });
 const fs = require('fs');
 
-const client = new MendoClient();
-require('dotenv').config({ path: '../.env' });
+const userClient = new MendoClient();
 
 (async () => {
 	try {
-		await client.login(process.env.MENDO_USERNAME, process.env.MENDO_PASSWORD); // Use username and password from enviorment variable
+		await userClient.login({
+			username: process.env.MENDO_USERNAME,
+			password: process.env.MENDO_PASSWORD,
+		});
 
-		const submissions = await client.getSubmissions(); // Get an array of sent submissions
+		const submissions = await userClient.getSubmissions(); // Get an array of sent submissions
 
 		const JSONformatted = JSON.stringify(submissions, null, '\t');
 		fs.writeFileSync('solved.json', JSONformatted); // Write array to file

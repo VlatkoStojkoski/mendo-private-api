@@ -1,28 +1,26 @@
-const Client = require('../lib/MendoClient');
-const userClient = new Client();
+const { MendoClient } = require('../');
 require('dotenv').config({ path: '../.env' });
 
-const fs = require('fs');
+const userClient = new MendoClient();
 
 (async () => {
 	try {
-		await userClient.login(
-			process.env.MENDO_USERNAME,
-			process.env.MENDO_PASSWORD
-		);
+		await userClient.login({
+			username: process.env.MENDO_USERNAME,
+			password: process.env.MENDO_PASSWORD,
+		});
 
-		const categoryTasks = await userClient.tasksByCategory(1);
-		const competitionTasks = await userClient.tasksByCompetition(372);
+		const competitionTasksIterator = userClient.tasksByCompetition(372);
+		const competitionTasksIds = [];
+		for await (const cptT of competitionTasksIterator) {
+			competitionTasksIds.push(cptT.info.id);
+		}
 
-		fs.writeFileSync('ctg.json', JSON.stringify(categoryTasks, null, '\t'));
-		fs.writeFileSync('cpt.json', JSON.stringify(competitionTasks, null, '\t'));
-
-		console.log(
-			categoryTasks.filter(
-				(ctgT) =>
-					competitionTasks.filter((cptT) => cptT.name === ctgT.name).length > 0
-			)
-		);
+		const categoryTasks = userClient.tasksByCategory(1);
+		for await (const ctgT of categoryTasks) {
+			if (competitionTasksIds.includes(ctgT.info.id))
+				console.log(await ctgT.extract(['stats']));
+		}
 	} catch (error) {
 		console.error(error);
 		process.exit(1);
