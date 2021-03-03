@@ -1,8 +1,8 @@
-import cheerio from 'cheerio';
+import * as cheerio from 'cheerio';
 import axios from 'axios';
-import qs from 'querystring';
-import fs from 'fs';
-import FormData from 'form-data';
+import * as qs from 'querystring';
+import * as fs from 'fs';
+import * as FormData from 'form-data';
 
 import Task from './Task';
 import {
@@ -47,6 +47,7 @@ class MendoClient {
 
 		return this;
 	}
+
 	async register(credentials: RegisterCredentials): Promise<MendoClient> {
 		if (!isRegisterCredentials(credentials))
 			throw Error('Undefined credentials');
