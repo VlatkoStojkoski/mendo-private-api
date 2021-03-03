@@ -1,5 +1,5 @@
 import cheerio from 'cheerio';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import qs from 'querystring';
 import fs from 'fs';
 import FormData from 'form-data';
@@ -21,7 +21,7 @@ import {
 
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
-export default class {
+class MendoClient {
 	constructor(cookie: string) {
 		axios.defaults.baseURL = 'https://mendo.mk/';
 		if (cookie) axios.defaults.headers.Cookie = cookie;
@@ -296,3 +296,5 @@ export default class {
 		}
 	}
 }
+
+export default MendoClient;

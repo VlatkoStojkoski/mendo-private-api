@@ -9,8 +9,6 @@ const fs = require('fs');
 		await task.extract(['stats', 'content']);
 
 		fs.writeFileSync('taskExtracted.json', JSON.stringify(task, null, '\t'));
-
-		// console.log(test);
 	} catch (error) {
 		console.log(error);
 		process.exit(1);
