@@ -8,18 +8,19 @@ const userClient = new MendoClient();
 		await userClient.login({
 			username: process.env.MENDO_USERNAME,
 			password: process.env.MENDO_PASSWORD,
-		});
+		}); // Login with username and password from enviorment variables
 
-		const competitionTasksIterator = userClient.tasksByCompetition(372);
-		const competitionTasksIds = [];
-		for await (const cptT of competitionTasksIterator) {
-			competitionTasksIds.push(cptT.info.id);
+		// Iterate over tasks in competition with id 372
+		const cptIds = [];
+		for await (const cptT of userClient.tasksByCompetition(372)) {
+			cptIds.push(cptT.info.id); // Append task id to array
 		}
 
-		const categoryTasks = userClient.tasksByCategory(1);
-		for await (const ctgT of categoryTasks) {
-			if (competitionTasksIds.includes(ctgT.info.id))
-				console.log(await ctgT.extract(['stats']));
+		// Iterate over tasks in category with id 1 (national tasks)
+		for await (const ctgT of userClient.tasksByCategory(1)) {
+			// See if competition tasks ids array includes the current task's id
+			if (cptIds.includes(ctgT.info.id))
+				console.log(await ctgT.extract(['stats'])); // Print task with extracted statistics from task
 		}
 	} catch (error) {
 		console.error(error);

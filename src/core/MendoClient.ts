@@ -1,7 +1,6 @@
 import * as cheerio from 'cheerio';
 import axios from 'axios';
 import * as qs from 'querystring';
-import * as fs from 'fs';
 import * as FormData from 'form-data';
 
 import Task from './Task';
@@ -12,7 +11,6 @@ import {
 	isRegisterCredentials,
 	Submission,
 	SubmissionError,
-	SubmissionFeedback,
 	SubmissionOptions,
 	TaskInfoBase,
 	CompetitionTaskInfo,
@@ -89,8 +87,75 @@ class MendoClient {
 		return JSESSIONID;
 	}
 
-	async getSubmissions() {
-		const uniquesubmissions = new Map();
+	async sendSubmission({ task, language, code, interval }: SubmissionOptions) {
+		const data = new FormData();
+		data.append('taskId', task.info.id);
+		data.append('solutionLanguage', language || -1);
+		data.append('solutionFile', code);
+
+		const { request } = await axios.post('User_SubmitTask.do', data, {
+			headers: {
+				...data.getHeaders(),
+			},
+		});
+
+		const date = new Date(),
+			dateFormatted = `${[
+				date.getDate(),
+				date.getMonth() + 1,
+				date.getFullYear(),
+			].join('/')} ${[date.getHours(), date.getMinutes()].join(':')}`;
+
+		const resHeader = request.socket._httpMessage._header;
+		const submissionUrl =
+			'https://mendo.mk' + resHeader.split('\n')[0].split(' ')[1];
+
+		let $;
+		do {
+			const { data } = await axios.get(submissionUrl);
+
+			$ = cheerio.load(data);
+
+			await sleep(interval || 500);
+		} while ($('#ajaxdiv').length);
+
+		const tests = [];
+		let passedCount = 0;
+		$('table:nth-child(6) tr td:nth-child(2)').each((i, elem) => {
+			const passed = $(elem).attr('class') == 'correct';
+			if (passed) passedCount++;
+			tests.push({
+				passed,
+				message: $(elem).text().trim(),
+			});
+		});
+
+		const errorEl = $('#errorInfoMessage');
+		let error: SubmissionError = errorEl.length && {
+			message: errorEl.text().trim(),
+			error: $('table:nth-child(2) td > span:nth-child(6)')
+				.html()
+				.replace(/(&nbsp;)|(<\/?ioasdsadstream>)/g, '')
+				.split('<br>')
+				.map((l) => l.trim())
+				.join('\n'),
+		};
+
+		const submission: Submission = {
+			tests,
+			passedTests: error ? 'СЕ/СЕ' : `${passedCount}/${tests.length}`,
+			sentAt: dateFormatted,
+			url: submissionUrl,
+		};
+		if (error) submission.error = error;
+
+		task.sentSubmissions.push(submission);
+
+		return task;
+	}
+
+	async getUniqueSubmissions() {
+		const uniqueSubmissions = new Map();
 		let currPage = 0;
 		let pagesubmissions = 0;
 		do {
@@ -120,14 +185,14 @@ class MendoClient {
 					.text()
 					.slice(0, -2);
 
-				if (uniquesubmissions.has(taskName)) {
-					const curr = uniquesubmissions.get(taskName);
-					uniquesubmissions.set(taskName, {
+				if (uniqueSubmissions.has(taskName)) {
+					const curr = uniqueSubmissions.get(taskName);
+					uniqueSubmissions.set(taskName, {
 						submissions: [...curr.submissions, submission],
 						solved: curr.solved ? true : solved,
 					});
 				} else {
-					uniquesubmissions.set(taskName, {
+					uniqueSubmissions.set(taskName, {
 						submissions: [submission],
 						solved,
 					});
@@ -140,67 +205,52 @@ class MendoClient {
 		} while (pagesubmissions == 60);
 
 		const submissions = [];
-		for (const [taskName, info] of uniquesubmissions.entries()) {
+		for (const [taskName, info] of uniqueSubmissions.entries()) {
 			submissions.push({ taskName, ...info });
 		}
 
 		return submissions;
 	}
 
-	async sendSubmission(options: SubmissionOptions) {
-		const data = new FormData();
-		data.append('taskId', options.taskId);
-		data.append('solutionLanguage', options.language || -1);
-		data.append('solutionFile', fs.createReadStream(options.submissionPath));
-
-		const { request } = await axios.post('User_SubmitTask.do', data, {
-			headers: {
-				...data.getHeaders(),
-			},
-		});
-
-		const resHeader = request.socket._httpMessage._header;
-		const submissionURL =
-			'https://mendo.mk' + resHeader.split('\n')[0].split(' ')[1];
-
-		let $;
+	async *getSubmissions() {
+		let currPage = 0,
+			pageSubmissions = 0;
 		do {
-			const { data } = await axios.get(submissionURL);
+			pageSubmissions = 0;
+			const { data } = await axios.get(
+				`User_ListSubmissions.do?start=${currPage * 60}`
+			);
+			const $ = cheerio.load(data);
 
-			$ = cheerio.load(data);
+			const tasks: Array<Task> = [];
+			$('.training-content tr').each((i, elem) => {
+				if (i == 0) return;
 
-			await sleep(options.interval || 500);
-		} while ($('#ajaxdiv').length);
+				const t: Task = new Task({
+					name: $(elem).find('td:nth-child(2) > a').text().slice(0, -2),
+					id: $(elem)
+						.find('td:nth-child(2) > a')
+						.attr('href')
+						.match(/(?<=id=)\d+/)[0],
+				});
 
-		const tests = [];
-		let passedAll = true;
-		$('table:nth-child(6) tr td:nth-child(2)').each((i, elem) => {
-			const passed = $(elem).attr('class') == 'correct';
-			if (!passed) passedAll = false;
-			tests.push({
-				passed,
-				message: $(elem).text().trim(),
+				const submission: Submission = {
+					sentAt: $(elem).find('td:nth-child(3)').text().trim(),
+					passedTests: $(elem).find('td:nth-child(4)').text().trim(),
+					url:
+						'https://mendo.mk' +
+						$(elem).find('td:nth-child(5) > a').attr('href').slice(1),
+				};
+
+				t.submissions.push(submission);
+				tasks.push(t);
+				pageSubmissions++;
 			});
-		});
 
-		const feedback: SubmissionFeedback = { tests, passedAll };
+			yield tasks;
 
-		const errorEl = $('#errorInfoMessage');
-		if (errorEl.length) {
-			const error: SubmissionError = {
-				message: errorEl.text().trim(),
-				error: $('table:nth-child(2) td > span:nth-child(6)')
-					.html()
-					.replace(/(&nbsp;)|(<\/?ioasdsadstream>)/g, '')
-					.split('<br>')
-					.map((l) => l.trim())
-					.join('\n'),
-			};
-
-			feedback.error = error;
-		}
-
-		return feedback;
+			currPage++;
+		} while (pageSubmissions == 60);
 	}
 
 	async *tasksByCategory(cid = 1) {

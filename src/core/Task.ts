@@ -1,12 +1,20 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-import { TaskStatistics, TaskInfo, TaskContent, TaskLimits } from '../types';
+import {
+	TaskStatistics,
+	TaskInfo,
+	TaskContent,
+	TaskLimits,
+	Submission,
+} from '../types';
 
 class Task {
 	info: TaskInfo;
 	stats: TaskStatistics;
 	content: TaskContent;
+	submissions: Array<Submission> = [];
+	sentSubmissions: Array<Submission> = [];
 
 	constructor(info: TaskInfo) {
 		const id =

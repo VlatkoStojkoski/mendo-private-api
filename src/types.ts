@@ -1,4 +1,5 @@
 import { ReadStream } from 'fs';
+import Task from './core/Task';
 
 export interface TaskStatistics {
 	sentSubmissions: number;
@@ -123,27 +124,18 @@ export interface Submission {
 	sentAt: string;
 	passedTests: string;
 	url: string;
+	tests?: Array<SubmissionTest>;
+	error?: SubmissionError;
 }
 
-interface SubmissionOptionsBasics {
-	taskId: string;
+export interface SubmissionOptions {
+	code: ReadStream;
+	task: Task;
 	language?: number;
 	interval?: number;
+	submissionStream?: ReadStream;
+	submissionPath?: string;
 }
-
-export interface SubmissionOptionsWithPath extends SubmissionOptionsBasics {
-	submissionPath: string;
-	submissionStream: undefined;
-}
-
-export interface SubmissionOptionsWithStream extends SubmissionOptionsBasics {
-	submissionStream: ReadStream;
-	submissionPath: undefined;
-}
-
-export type SubmissionOptions =
-	| SubmissionOptionsWithPath
-	| SubmissionOptionsWithStream;
 
 export interface SubmissionError {
 	message: string;
@@ -153,10 +145,4 @@ export interface SubmissionError {
 interface SubmissionTest {
 	passed: boolean;
 	message: string;
-}
-
-export interface SubmissionFeedback {
-	tests: Array<SubmissionTest>;
-	passedAll: boolean;
-	error?: SubmissionError;
 }

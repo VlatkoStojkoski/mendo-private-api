@@ -15,6 +15,5 @@
     "outDir": "./dist",
     "allowJs": false,
     "resolveJsonModule": true,
-    "noUnusedLocals": true
   }
 }
