@@ -1,7 +1,7 @@
 {
 	"name": "mendo-private-api",
 	"author": "Vlatko Stojkoski",
-	"version": "0.5.4",
+	"version": "0.6.0",
 	"description": "A private API wrapper for mendo.mk (system for competitions in informatics in Macedonia).",
 	"main": "dist/index.js",
 	"types": "dist/index.d.ts",
