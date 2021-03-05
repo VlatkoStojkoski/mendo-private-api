@@ -1,0 +1,576 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>MendoClient | mendo-private-api</title>
+	<meta name="description" content="Documentation for mendo-private-api">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">mendo-private-api</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">mendo-private-api</a>
+				</li>
+				<li>
+					<a href="mendoclient.html">MendoClient</a>
+				</li>
+			</ul>
+			<h1>Class MendoClient</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>Class representing the API client used for making different requests</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">MendoClient</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="mendoclient.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><a href="mendoclient.html#generatesession" class="tsd-kind-icon">generate<wbr>Session</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="mendoclient.html#getcookie" class="tsd-kind-icon">get<wbr>Cookie</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="mendoclient.html#getsubmissions" class="tsd-kind-icon">get<wbr>Submissions</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="mendoclient.html#getuniquesubmissions" class="tsd-kind-icon">get<wbr>Unique<wbr>Submissions</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="mendoclient.html#login" class="tsd-kind-icon">login</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="mendoclient.html#register" class="tsd-kind-icon">register</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="mendoclient.html#sendsubmission" class="tsd-kind-icon">send<wbr>Submission</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="mendoclient.html#tasksbycategory" class="tsd-kind-icon">tasks<wbr>ByCategory</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="mendoclient.html#tasksbycompetition" class="tsd-kind-icon">tasks<wbr>ByCompetition</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Mendo<wbr>Client<span class="tsd-signature-symbol">(</span>cookie<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="mendoclient.html" class="tsd-signature-type" data-tsd-kind="Class">MendoClient</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L22">core/MendoClient.ts:22</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Create a client from given session cookie, or have the login/register function generate a session afterwards.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cookie: <span class="tsd-signature-type">string</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A session cookie to use instead of generating a new cookie.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="mendoclient.html" class="tsd-signature-type" data-tsd-kind="Class">MendoClient</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-private">
+					<a name="generatesession" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> generate<wbr>Session</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-private">
+						<li class="tsd-signature tsd-kind-icon">generate<wbr>Session<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L126">core/MendoClient.ts:126</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generates a new session cookie from the server.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returned promise resolves with cookie string starting with &quot;JSESSIONID=...&quot;</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getcookie" class="tsd-anchor"></a>
+					<h3>get<wbr>Cookie</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Cookie<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L43">core/MendoClient.ts:43</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get session cookie to use instead of logging in/registering every time.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #008000">// Get the cookie</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">client</span><span style="color: #000000">.</span><span style="color: #795E26">getCookie</span><span style="color: #000000">())</span>
+
+<span style="color: #008000">// Use the cookie afterwards</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">client</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #795E26">MendoClient</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;{insert cookie here}&#039;</span><span style="color: #000000">)</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+							<p>Returns session cookie.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getsubmissions" class="tsd-anchor"></a>
+					<h3>get<wbr>Submissions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Submissions<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="task.html" class="tsd-signature-type" data-tsd-kind="Class">Task</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L288">core/MendoClient.ts:288</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get sent submissions as iterable pages (arrays of task object).</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="task.html" class="tsd-signature-type" data-tsd-kind="Class">Task</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns an async iterator containing page tasks.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="getuniquesubmissions" class="tsd-anchor"></a>
+					<h3>get<wbr>Unique<wbr>Submissions</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Unique<wbr>Submissions<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L226">core/MendoClient.ts:226</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get submsissions as children of corresponding tasks.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returned promise contains an array of objects with the task name and previously sent submsisions.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="login" class="tsd-anchor"></a>
+					<h3>login</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">login<span class="tsd-signature-symbol">(</span>credentials<span class="tsd-signature-symbol">: </span><a href="../interfaces/logincredentials.html" class="tsd-signature-type" data-tsd-kind="Interface">LoginCredentials</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="mendoclient.html" class="tsd-signature-type" data-tsd-kind="Class">MendoClient</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L58">core/MendoClient.ts:58</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generates a new session cookie, and authenticates cookie with a login request.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">userClient</span><span style="color: #000000">.</span><span style="color: #795E26">login</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">username:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{username here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">password:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{password here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>credentials: <a href="../interfaces/logincredentials.html" class="tsd-signature-type" data-tsd-kind="Interface">LoginCredentials</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Credentials used for logging in.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="mendoclient.html" class="tsd-signature-type" data-tsd-kind="Class">MendoClient</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns client object with authenticated cookie.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="register" class="tsd-anchor"></a>
+					<h3>register</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">register<span class="tsd-signature-symbol">(</span>credentials<span class="tsd-signature-symbol">: </span><a href="../interfaces/registercredentials.html" class="tsd-signature-type" data-tsd-kind="Interface">RegisterCredentials</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="mendoclient.html" class="tsd-signature-type" data-tsd-kind="Class">MendoClient</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L93">core/MendoClient.ts:93</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Generates a new session cookie, and authenticates cookie with a register request.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">userClient</span><span style="color: #000000">.</span><span style="color: #795E26">register</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">username:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{username here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">fullName:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{full name here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">email:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{email here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">password:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{password here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">city:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{city here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">country:</span><span style="color: #000000"> {country number </span><span style="color: #001080">here</span><span style="color: #000000">}, </span><span style="color: #008000">// See #country options at https://mendo.mk/Register.do</span>
+<span style="color: #000000">    </span><span style="color: #001080">profession:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{profession here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">institution:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;{institution here}&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">});</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>credentials: <a href="../interfaces/registercredentials.html" class="tsd-signature-type" data-tsd-kind="Interface">RegisterCredentials</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Credentials used for registering.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="mendoclient.html" class="tsd-signature-type" data-tsd-kind="Class">MendoClient</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns client object with authenticated cookie.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="sendsubmission" class="tsd-anchor"></a>
+					<h3>send<wbr>Submission</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">send<wbr>Submission<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">: </span><a href="../interfaces/submissionoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SubmissionOptions</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="task.html" class="tsd-signature-type" data-tsd-kind="Class">Task</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L150">core/MendoClient.ts:150</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sends submission and returns task object containing the test results.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><pre><code class="language-javascript"><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">userClient</span><span style="color: #000000">.</span><span style="color: #795E26">sendSubmission</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #001080">task</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">code:</span><span style="color: #000000"> </span><span style="color: #001080">fs</span><span style="color: #000000">.</span><span style="color: #795E26">createReadStream</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;helloWorld.cpp&#039;</span><span style="color: #000000">), </span><span style="color: #008000">// Make a read stream from file &#039;helloWorld.cpp&#039;</span>
+<span style="color: #000000">    </span><span style="color: #001080">interval:</span><span style="color: #000000"> </span><span style="color: #098658">250</span><span style="color: #000000">, </span><span style="color: #008000">// The interval between checking for test results</span>
+<span style="color: #000000">});</span>
+</code></pre>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>__namedParameters: <a href="../interfaces/submissionoptions.html" class="tsd-signature-type" data-tsd-kind="Interface">SubmissionOptions</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Promise</span><span class="tsd-signature-symbol">&lt;</span><a href="task.html" class="tsd-signature-type" data-tsd-kind="Class">Task</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns task object containing the test results inside the public field <code>Task.sentSubmissions</code>.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tasksbycategory" class="tsd-anchor"></a>
+					<h3>tasks<wbr>ByCategory</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">tasks<wbr>ByCategory<span class="tsd-signature-symbol">(</span>cid<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="task.html" class="tsd-signature-type" data-tsd-kind="Class">Task</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L334">core/MendoClient.ts:334</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get tasks from category as async iterator.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cid: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 1</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Category id to get tasks from.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="task.html" class="tsd-signature-type" data-tsd-kind="Class">Task</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns an async iterator containing category tasks.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="tasksbycompetition" class="tsd-anchor"></a>
+					<h3>tasks<wbr>ByCompetition</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">tasks<wbr>ByCompetition<span class="tsd-signature-symbol">(</span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="task.html" class="tsd-signature-type" data-tsd-kind="Class">Task</a><span class="tsd-signature-symbol">&gt;</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/VlatkoStojkoski/mendo-private-api/blob/dc3b750/src/core/MendoClient.ts#L387">core/MendoClient.ts:387</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Get tasks from competition as async iterator.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>id: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Competition id to get tasks from.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">AsyncIterableIterator</span><span class="tsd-signature-symbol">&lt;</span><a href="task.html" class="tsd-signature-type" data-tsd-kind="Class">Task</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<p>Returns an async iterator containing competition tasks.</p>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="mendoclient.html" class="tsd-kind-icon">Mendo<wbr>Client</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="mendoclient.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-private">
+								<a href="mendoclient.html#generatesession" class="tsd-kind-icon">generate<wbr>Session</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="mendoclient.html#getcookie" class="tsd-kind-icon">get<wbr>Cookie</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="mendoclient.html#getsubmissions" class="tsd-kind-icon">get<wbr>Submissions</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="mendoclient.html#getuniquesubmissions" class="tsd-kind-icon">get<wbr>Unique<wbr>Submissions</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="mendoclient.html#login" class="tsd-kind-icon">login</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="mendoclient.html#register" class="tsd-kind-icon">register</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="mendoclient.html#sendsubmission" class="tsd-kind-icon">send<wbr>Submission</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="mendoclient.html#tasksbycategory" class="tsd-kind-icon">tasks<wbr>ByCategory</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="mendoclient.html#tasksbycompetition" class="tsd-kind-icon">tasks<wbr>ByCompetition</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="task.html" class="tsd-kind-icon">Task</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/categorytaskinfo.html" class="tsd-kind-icon">Category<wbr>Task<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/competitiontaskinfo.html" class="tsd-kind-icon">Competition<wbr>Task<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/examplecase.html" class="tsd-kind-icon">Example<wbr>Case</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/logincredentials.html" class="tsd-kind-icon">Login<wbr>Credentials</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/mendouserclient.html" class="tsd-kind-icon">Mendo<wbr>User<wbr>Client</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/registercredentials.html" class="tsd-kind-icon">Register<wbr>Credentials</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/submission.html" class="tsd-kind-icon">Submission</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/submissionerror.html" class="tsd-kind-icon">Submission<wbr>Error</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/submissionoptions.html" class="tsd-kind-icon">Submission<wbr>Options</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/taskconstraints.html" class="tsd-kind-icon">Task<wbr>Constraints</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/taskcontent.html" class="tsd-kind-icon">Task<wbr>Content</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/taskinfobase.html" class="tsd-kind-icon">Task<wbr>Info<wbr>Base</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/taskstatistics.html" class="tsd-kind-icon">Task<wbr>Statistics</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/teachingcategorytaskinfo.html" class="tsd-kind-icon">Teaching<wbr>Category<wbr>Task<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#extractdata" class="tsd-kind-icon">Extract<wbr>Data</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../modules.html#taskinfo" class="tsd-kind-icon">Task<wbr>Info</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#islogincredentials" class="tsd-kind-icon">is<wbr>Login<wbr>Credentials</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#isregistercredentials" class="tsd-kind-icon">is<wbr>Register<wbr>Credentials</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

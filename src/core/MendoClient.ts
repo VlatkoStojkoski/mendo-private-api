@@ -18,16 +18,43 @@ import {
 
 const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
 
+/** Class representing the API client used for making different requests */
 class MendoClient {
+	/**
+	 * Create a client from given session cookie, or have the login/register function generate a session afterwards.
+	 * @param {string} cookie A session cookie to use instead of generating a new cookie.
+	 */
 	constructor(cookie: string) {
 		axios.defaults.baseURL = 'https://mendo.mk/';
 		if (cookie) axios.defaults.headers.Cookie = cookie;
 	}
 
+	/**
+	 * Get session cookie to use instead of logging in/registering every time.
+	 * @returns {string} Returns session cookie.
+	 * @example ```javascript
+	 * // Get the cookie
+	 * console.log(client.getCookie())
+	 *
+	 * // Use the cookie afterwards
+	 * const client = new MendoClient('{insert cookie here}')
+	 * ```
+	 */
 	getCookie(): string {
 		return axios.defaults.headers.Cookie;
 	}
 
+	/**
+	 * Generates a new session cookie, and authenticates cookie with a login request.
+	 * @param {LoginCredentials} credentials Credentials used for logging in.
+	 * @returns {Promise<MendoClient>} Returns client object with authenticated cookie.
+	 * @example ```javascript
+	 * await userClient.login({
+	 * 	username: '{username here}',
+	 * 	password: '{password here}',
+	 * });
+	 * ```
+	 */
 	async login(credentials: LoginCredentials): Promise<MendoClient> {
 		if (!isLoginCredentials(credentials)) throw Error('Undefined credentials');
 
@@ -46,6 +73,23 @@ class MendoClient {
 		return this;
 	}
 
+	/**
+	 * Generates a new session cookie, and authenticates cookie with a register request.
+	 * @param {RegisterCredentials} credentials Credentials used for registering.
+	 * @returns {Promise<MendoClient>} Returns client object with authenticated cookie.
+	 * @example ```javascript
+	 * await userClient.register({
+	 * 	username: '{username here}',
+	 * 	fullName: '{full name here}',
+	 * 	email: '{email here}',
+	 * 	password: '{password here}',
+	 * 	city: '{city here}',
+	 * 	country: {country number here}, // See #country options at https://mendo.mk/Register.do
+	 * 	profession: '{profession here}',
+	 * 	institution: '{institution here}',
+	 * });
+	 * ```
+	 */
 	async register(credentials: RegisterCredentials): Promise<MendoClient> {
 		if (!isRegisterCredentials(credentials))
 			throw Error('Undefined credentials');
@@ -75,7 +119,11 @@ class MendoClient {
 		return this;
 	}
 
-	async generateSession() {
+	/**
+	 * Generates a new session cookie from the server.
+	 * @returns {Promise<string>} Returned promise resolves with cookie string starting with "JSESSIONID=..."
+	 */
+	private async generateSession(): Promise<string> {
 		const { headers } = await axios.get('https://mendo.mk');
 
 		const JSESSIONID = headers['set-cookie']
@@ -87,7 +135,24 @@ class MendoClient {
 		return JSESSIONID;
 	}
 
-	async sendSubmission({ task, language, code, interval }: SubmissionOptions) {
+	/**
+	 * Sends submission and returns task object containing the test results.
+	 * @param {SubmissionOptions} submissionOptions Object containing the task, language, code and checking interval.
+	 * @returns {Promise<Task>} Returns task object containing the test results inside the public field `Task.sentSubmissions`.
+	 * @example ```javascript
+	 * await userClient.sendSubmission({
+	 * 	task,
+	 * 	code: fs.createReadStream('helloWorld.cpp'), // Make a read stream from file 'helloWorld.cpp'
+	 * 	interval: 250, // The interval between checking for test results
+	 * });
+	 * ```
+	 */
+	async sendSubmission({
+		task,
+		language,
+		code,
+		interval,
+	}: SubmissionOptions): Promise<Task> {
 		const data = new FormData();
 		data.append('taskId', task.info.id);
 		data.append('solutionLanguage', language || -1);
@@ -154,7 +219,11 @@ class MendoClient {
 		return task;
 	}
 
-	async getUniqueSubmissions() {
+	/**
+	 * Get submsissions as children of corresponding tasks.
+	 * @returns {Promise<Array<any>>} Returned promise contains an array of objects with the task name and previously sent submsisions.
+	 */
+	async getUniqueSubmissions(): Promise<Array<any>> {
 		const uniqueSubmissions = new Map();
 		let currPage = 0;
 		let pagesubmissions = 0;
@@ -212,7 +281,11 @@ class MendoClient {
 		return submissions;
 	}
 
-	async *getSubmissions() {
+	/**
+	 * Get sent submissions as iterable pages (arrays of task object).
+	 * @returns {AsyncIterableIterator<Array<Task>>} Returns an async iterator containing page tasks.
+	 */
+	async *getSubmissions(): AsyncIterableIterator<Array<Task>> {
 		let currPage = 0,
 			pageSubmissions = 0;
 		do {
@@ -253,7 +326,12 @@ class MendoClient {
 		} while (pageSubmissions == 60);
 	}
 
-	async *tasksByCategory(cid = 1) {
+	/**
+	 * Get tasks from category as async iterator.
+	 * @param {number} cid Category id to get tasks from.
+	 * @returns {AsyncIterableIterator<Task>} Returns an async iterator containing category tasks.
+	 */
+	async *tasksByCategory(cid = 1): AsyncIterableIterator<Task> {
 		const { data } = await axios.get(`Training.do?cid=${cid}`);
 		const $ = cheerio.load(data);
 
@@ -301,7 +379,12 @@ class MendoClient {
 		}
 	}
 
-	async *tasksByCompetition(id) {
+	/**
+	 * Get tasks from competition as async iterator.
+	 * @param {number} id Competition id to get tasks from.
+	 * @returns {AsyncIterableIterator<Task>} Returns an async iterator containing competition tasks.
+	 */
+	async *tasksByCompetition(id): AsyncIterableIterator<Task> {
 		const { data } = await axios.get(`User_Competition.do?id=${id}`);
 		const $ = cheerio.load(data);
 

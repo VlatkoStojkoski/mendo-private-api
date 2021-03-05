@@ -5,17 +5,31 @@ import {
 	TaskStatistics,
 	TaskInfo,
 	TaskContent,
-	TaskLimits,
+	TaskConstraints,
 	Submission,
+	ExtractData,
 } from '../types';
 
+/** Class representing general information, statistics, content and submissions of a task */
 class Task {
+	/** General information on the task. */
 	info: TaskInfo;
+	/** Task statistics. */
 	stats: TaskStatistics;
+	/** Task content (from task page). */
 	content: TaskContent;
+	/** An array containing previously sent submissions. */
 	submissions: Array<Submission> = [];
+	/** An array containing the submissions sent now (from the API). */
 	sentSubmissions: Array<Submission> = [];
 
+	/**
+	 * Create a task from partial or all general information.
+	 * @param {TaskInfo} info General information about the task. Either task url or id is required.
+	 * @example ```javascript
+	 * new Task({ id: '341' }); // Get task from id
+	 * ```
+	 */
 	constructor(info: TaskInfo) {
 		const id =
 			info.id ||
@@ -36,7 +50,17 @@ class Task {
 		this.info = info;
 	}
 
-	async extract(extractData: Array<string>) {
+	/**
+	 * Extract information from task, and place it in a public field inside the task object.
+	 * @param {Array<string>} extractData An array containing the information to extract. (refer to the ExtractData type)
+	 * @returns {Promise<Task>} The promise resolves with the modified task object.
+	 * @example ```javascript
+	 * const task = new Task({ id: '341' });
+	 * await task.extract(['stats', 'content']);
+	 * console.log({ statistics: task.stats, content: task.content });
+	 * ```
+	 */
+	async extract(extractData: ExtractData): Promise<Task> {
 		await Promise.all(
 			extractData.map(async (v, i) => {
 				switch (v) {
@@ -49,7 +73,7 @@ class Task {
 					case 'description':
 					case 'input':
 					case 'output':
-					case 'limits':
+					case 'constraints':
 					case 'examples':
 						await this.getContent();
 						break;
@@ -60,7 +84,12 @@ class Task {
 		return this;
 	}
 
-	async getStats() {
+	/**
+	 * Get task statistics, and place them inside the `Task.stats` public field.
+	 * @private
+	 * @returns {Promise<Task>}
+	 */
+	private async getStats(): Promise<Task> {
 		const { data } = await axios.get(this.info.statsUrl);
 
 		const $ = cheerio.load(data);
@@ -81,7 +110,12 @@ class Task {
 		return this;
 	}
 
-	async getContent() {
+	/**
+	 * Get task content, and place them inside the `Task.content` public field.
+	 * @private
+	 * @returns {Promise<Task>}
+	 */
+	private async getContent(): Promise<Task> {
 		const { data } = await axios.get(this.info.url);
 
 		const $ = cheerio.load(data);
@@ -91,7 +125,7 @@ class Task {
 			description: '',
 			input: '',
 			output: '',
-			limits: {
+			constraints: {
 				time: '',
 				memory: '',
 			},
@@ -134,11 +168,11 @@ class Task {
 					case 'Constraints':
 						if (limitCounter == 0) {
 							const limitMatch = elText.match(/\d+ [^Ѐ-ЯA-Z]+/g);
-							const limits: TaskLimits = {
+							const limits: TaskConstraints = {
 								time: limitMatch[0],
 								memory: limitMatch[1],
 							};
-							c.limits = limits;
+							c.constraints = limits;
 						}
 						limitCounter++;
 						break;

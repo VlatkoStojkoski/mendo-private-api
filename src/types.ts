@@ -22,6 +22,19 @@ export interface TaskInfoBase {
 	statsUrl?: string;
 }
 
+export type ExtractData = Array<
+	| 'statistics'
+	| 'stats'
+	| 'content'
+	| 'name'
+	| 'description'
+	| 'input'
+	| 'output'
+	| 'limits'
+	| 'constraints'
+	| 'examples'
+>;
+
 interface CompetitionSubmission {
 	points: number;
 	url: string;
@@ -52,7 +65,7 @@ export interface ExampleCase {
 	output: string;
 }
 
-export interface TaskLimits {
+export interface TaskConstraints {
 	time: string;
 	memory: string;
 }
@@ -63,7 +76,7 @@ export interface TaskContent {
 	input: string;
 	output: string;
 	examples: Array<ExampleCase>;
-	limits: TaskLimits;
+	constraints: TaskConstraints;
 }
 
 export interface MendoUserClient {

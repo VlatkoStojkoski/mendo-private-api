@@ -17,6 +17,9 @@
 	"files": [
 		"dist"
 	],
+	"scripts": {
+		"docs": "typedoc src/index.ts"
+	},
 	"dependencies": {
 		"axios": "^0.21.1",
 		"cheerio": "^1.0.0-rc.5",
@@ -25,6 +28,7 @@
 		"querystring": "^0.2.0"
 	},
 	"devDependencies": {
-		"@types/node": "^14.14.31"
+		"@types/node": "^14.14.31",
+		"typedoc": "^0.20.29"
 	}
 }
