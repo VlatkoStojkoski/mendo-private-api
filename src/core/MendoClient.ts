@@ -61,7 +61,7 @@ class MendoClient {
 		await this.generateSession();
 
 		const req = qs.stringify({ ...credentials });
-		const res = await axios.post('Login.do', { ...req, rememberMe: 'on'}, {
+		const res = await axios.post('Login.do', req, {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
@@ -99,7 +99,7 @@ class MendoClient {
 		credentials.rpassword = credentials.password;
 
 		const req = qs.stringify({ ...credentials });
-		const res = await axios.post('SaveRegistration.do', { ...req, rememberMe: 'on'}, {
+		const res = await axios.post('SaveRegistration.do', req, {
 			headers: {
 				'Content-Type': 'application/x-www-form-urlencoded',
 			},
