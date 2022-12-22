@@ -8,9 +8,9 @@ const userClient = new MendoClient();
 	try {
 		// Register new user
 		await userClient.register({
-			username: 'mendoPrivateAPIacc26',
+			username: 'mendoPrivateAPIaccmile1',
 			fullName: 'Mendo Private API',
-			email: 'test@mail26.com',
+			email: 'test@mailmile1.com',
 			password: 'password',
 			city: 'Скопје',
 			country: '102',

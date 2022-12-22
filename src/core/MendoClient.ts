@@ -158,11 +158,14 @@ class MendoClient {
 		data.append('solutionLanguage', language || -1);
 		data.append('solutionFile', code);
 
-		const { request } = await axios.post('User_SubmitTask.do', data, {
+		const { data: resData } = await axios.post('User_SubmitTask.do', data, {
 			headers: {
 				...data.getHeaders(),
 			},
 		});
+
+		const submissionId =
+			resData.match(/(?<=submissionAjaxIntervalId = setInterval\("xmlSubmissionAjaxRequestGet\(')\d+(?=')/)[0]
 
 		const date = new Date(),
 			dateFormatted = `${[
@@ -171,9 +174,8 @@ class MendoClient {
 				date.getFullYear(),
 			].join('/')} ${[date.getHours(), date.getMinutes()].join(':')}`;
 
-		const resHeader = request.socket._httpMessage._header;
 		const submissionUrl =
-			'https://mendo.mk' + resHeader.split('\n')[0].split(' ')[1];
+			'https://mendo.mk/User_Submission.do?id=' + submissionId;
 
 		let $;
 		do {
@@ -404,20 +406,20 @@ class MendoClient {
 				submission:
 					$(elem).find('td:nth-child(5)').text().trim().length > 0
 						? {
-								points: parseInt(
-									$(elem)
-										.find('td:nth-child(5)')
-										.text()
-										.replace('поени', '')
-										.trim()
-								),
-								url: $(elem).find('td:nth-child(5) > a').attr('href')
-									? $(elem)
-											.find('td:nth-child(5) > a')
-											.attr('href')
-											.replace(/^\./, 'https://mendo.mk')
-									: '',
-						  }
+							points: parseInt(
+								$(elem)
+									.find('td:nth-child(5)')
+									.text()
+									.replace('поени', '')
+									.trim()
+							),
+							url: $(elem).find('td:nth-child(5) > a').attr('href')
+								? $(elem)
+									.find('td:nth-child(5) > a')
+									.attr('href')
+									.replace(/^\./, 'https://mendo.mk')
+								: '',
+						}
 						: undefined,
 			};
 
